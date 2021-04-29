@@ -1,0 +1,4 @@
+usage: "&b&lFreeze &7| Invalid usage, try: /freeze <Player|Permission|All> <Player|Permission> <time>"
+frozen: "&b&lFreeze &7| You have been frozen."
+unFrozen: "&b&lFreeze &7| You have been unfrozen"
+invalidPlayer: "&b&lFreeze &7| Invalid player"

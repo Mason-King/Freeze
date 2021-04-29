@@ -1,0 +1,9 @@
+name: Freeze
+version: ${project.version}
+main: freeze.Main
+api-version: 1.16
+authors: [ Mason ]
+description: Freeze plugin
+website: masonking.dev
+commands:
+  freeze:
