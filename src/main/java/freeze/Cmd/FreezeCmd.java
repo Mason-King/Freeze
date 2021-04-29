@@ -3,6 +3,7 @@ package freeze.Cmd;
 import freeze.Main;
 import freeze.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -26,6 +27,8 @@ public class FreezeCmd implements CommandExecutor {
                     for(Player pl : Bukkit.getOnlinePlayers()) {
                         utils.freeze(pl);
                         pl.sendMessage(utils.chat(main.getConfig().getString("frozen")));
+                        p.playSound(p.getLocation(), Sound.valueOf(main.getConfig().getString("freezeSound")), 10, 10);
+                        p.sendTitle(utils.chat(main.getConfig().getString("freezeTitle")), utils.chat(main.getConfig().getString("freezeTitleSubText")), 1, 20,1);
                     }
                     return false;
                 } else if(args[0].equalsIgnoreCase("PLAYER")) {
@@ -40,6 +43,8 @@ public class FreezeCmd implements CommandExecutor {
                     } else {
                         utils.freeze(toFreeze);
                         toFreeze.sendMessage(utils.chat(main.getConfig().getString("frozen")));
+                        p.playSound(p.getLocation(), Sound.valueOf(main.getConfig().getString("freezeSound")), 10, 10);
+                        p.sendTitle(utils.chat(main.getConfig().getString("freezeTitle")), utils.chat(main.getConfig().getString("freezeTitleSubText")), 1, 20,1);
                     }
                 } else if(args[0].equalsIgnoreCase("PERMISSION")) {
                     if(args.length < 3) {
@@ -48,6 +53,12 @@ public class FreezeCmd implements CommandExecutor {
                     } else {
                         for(Player pl : utils.getPlayer(args[1])) {
                             utils.freeze(pl);
+                            p.playSound(p.getLocation(),  Sound.valueOf(main.getConfig().getString("freezeSound")), 10, 10);
+                            if(main.getConfig().get(args[1]) == null) {
+                                p.sendTitle(utils.chat(main.getConfig().getString("freezeTitle")), utils.chat(main.getConfig().getString("freezeTitle")), 1, 20, 1);
+                            } else {
+                                p.sendTitle(utils.chat(main.getConfig().getString(args[0] + ".title")), utils.chat(main.getConfig().getString(args[0] + ".subtitle")), 1, 20, 1);
+                            }
                             pl.sendMessage(utils.chat(main.getConfig().getString("frozen")));
                         }
                     }
@@ -59,6 +70,8 @@ public class FreezeCmd implements CommandExecutor {
                     for(Player pl : Bukkit.getOnlinePlayers()) {
                         utils.freeze(pl, time);
                         pl.sendMessage(utils.chat(main.getConfig().getString("frozen")));
+                        p.playSound(p.getLocation(), Sound.valueOf(main.getConfig().getString("freezeSound")), 10, 10);
+                        p.sendTitle(utils.chat(main.getConfig().getString("freezeTitle")), utils.chat(main.getConfig().getString("freezeTitleSubText")), 1, 20,1);
                     }
                     return false;
                 } else if(args[0].equalsIgnoreCase("PLAYER")) {
@@ -69,6 +82,8 @@ public class FreezeCmd implements CommandExecutor {
                     } else {
                         utils.freeze(toFreeze, time);
                         toFreeze.sendMessage(utils.chat(main.getConfig().getString("frozen")));
+                        p.playSound(p.getLocation(), Sound.valueOf(main.getConfig().getString("freezeSound")), 10, 10);
+                        p.sendTitle(utils.chat(main.getConfig().getString("freezeTitle")), utils.chat(main.getConfig().getString("freezeTitleSubText")), 1, 20,1);
                     }
                 } else if(args[0].equalsIgnoreCase("PERMISSION")) {
                     if(args.length < 3) {
@@ -78,6 +93,12 @@ public class FreezeCmd implements CommandExecutor {
                         for(Player pl : utils.getPlayer(args[2])) {
                             utils.freeze(pl, time);
                             pl.sendMessage(utils.chat(main.getConfig().getString("frozen")));
+                            p.playSound(p.getLocation(),  Sound.valueOf(main.getConfig().getString("freezeSound")), 10, 10);
+                            if(main.getConfig().get(args[1]) == null) {
+                                p.sendTitle(utils.chat(main.getConfig().getString("freezeTitle")), utils.chat(main.getConfig().getString("freezeTitle")), 1, 20, 1);
+                            } else {
+                                p.sendTitle(utils.chat(main.getConfig().getString(args[0] + ".title")), utils.chat(main.getConfig().getString(args[0] + ".subtitle")), 1, 20, 1);
+                            }
                         }
                     }
                 }

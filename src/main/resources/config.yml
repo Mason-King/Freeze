@@ -2,3 +2,11 @@ usage: "&b&lFreeze &7| Invalid usage, try: /freeze <Player|Permission|All> <Play
 frozen: "&b&lFreeze &7| You have been frozen."
 unFrozen: "&b&lFreeze &7| You have been unfrozen"
 invalidPlayer: "&b&lFreeze &7| Invalid player"
+unFreezeUsage: "&b&lFreeze &7| You have been unfrozen."
+
+freezeSound: ENTITY_VILLAGER_TRADE
+freezeTitle: "&7You have been frozen!"
+freezeTitleSubText: "&7Contact administration if you believe this is an issue"
+"example.permission":
+  title: "Example permission title"
+  subtitle: "Example permission subtext"

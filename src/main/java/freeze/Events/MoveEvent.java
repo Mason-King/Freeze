@@ -21,13 +21,12 @@ public class MoveEvent implements Listener {
     public void onMove(PlayerMoveEvent event) {
         Player p = (Player)  event.getPlayer();
         if(!frozen.containsKey(p)) return;
-        System.out.println(frozen.get(p));
-        System.out.println(System.currentTimeMillis() * 1000);
         if(frozen.get(p) == null) {
             //if there is no time limit
             event.setCancelled(true);
             return;
-        } else if(System.currentTimeMillis() * 1000 <= frozen.get(p)) {
+        }
+        if(System.currentTimeMillis() < frozen.get(p)) {
             //there is a time limit, and it is not passed yet
             event.setCancelled(true);//
             return;

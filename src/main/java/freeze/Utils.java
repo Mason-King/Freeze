@@ -2,6 +2,7 @@ package freeze;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -20,7 +21,7 @@ public class Utils {
     }
 
     public void freeze(Player p, Long time) {
-        long start = System.currentTimeMillis() * 1000 + time;
+        long start = System.currentTimeMillis() + (time * 1000);
         frozen.put(p, start);
     }
 
