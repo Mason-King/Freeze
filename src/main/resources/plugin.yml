@@ -7,3 +7,4 @@ description: Freeze plugin
 website: masonking.dev
 commands:
   freeze:
+  unfreeze:

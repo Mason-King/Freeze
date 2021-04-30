@@ -11,6 +11,7 @@ public class Utils {
 
     private Main main;
     private static HashMap<Player, Long> frozen = new HashMap<>();
+    private static boolean lockdown;
 
     public Utils(Main main) {
         this.main = main;
@@ -33,6 +34,14 @@ public class Utils {
             }
         }
         return players;
+    }
+
+    public void setLockdown(Boolean b) {
+        lockdown = b;
+    }
+
+    public Boolean getLockdown() {
+        return lockdown;
     }
 
     public HashMap<Player, Long> getFrozen() {

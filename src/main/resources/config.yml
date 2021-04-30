@@ -3,10 +3,24 @@ frozen: "&b&lFreeze &7| You have been frozen."
 unFrozen: "&b&lFreeze &7| You have been unfrozen"
 invalidPlayer: "&b&lFreeze &7| Invalid player"
 unFreezeUsage: "&b&lFreeze &7| You have been unfrozen."
+reload: "&b&lFreeze &7| Config has been reloaded."
+lockdownOn: "&b&lFreeze &7| Lockdown has been enabled"
+lockdownOff: "&b&lFreeze &7| Lockdown has been disabled"
+
+exempt:
+  - permission.1
+  - permission.2
 
 freezeSound: ENTITY_VILLAGER_TRADE
 freezeTitle: "&7You have been frozen!"
 freezeTitleSubText: "&7Contact administration if you believe this is an issue"
+
+unFreezeSound: ENTITY_VILLAGER_TRADE
+unFreezeTitle: "&7You have been unfrozen!"
+unFrreezeTitleSubText: "&7You may now move again."
+
 "example.permission":
   title: "Example permission title"
   subtitle: "Example permission subtext"
+  message: "Example message"
+  sound: ENTITY_VILLAGER_TRADE

@@ -20,6 +20,9 @@ public class MoveEvent implements Listener {
     @EventHandler
     public void onMove(PlayerMoveEvent event) {
         Player p = (Player)  event.getPlayer();
+        if(utils.getLockdown() == true) {
+            event.setCancelled(true);
+        }
         if(!frozen.containsKey(p)) return;
         if(frozen.get(p) == null) {
             //if there is no time limit
