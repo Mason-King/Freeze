@@ -21,6 +21,11 @@ public class MoveEvent implements Listener {
     public void onMove(PlayerMoveEvent event) {
         Player p = (Player)  event.getPlayer();
         if(utils.getLockdown() == true) {
+            for(String s : main.getConfig().getStringList("exempt")) {
+                if(p.hasPermission(s)) {
+                    return;
+                }
+            }
             event.setCancelled(true);
         }
         if(!frozen.containsKey(p)) return;

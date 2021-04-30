@@ -26,11 +26,13 @@ public class FreezeCmd implements CommandExecutor {
                 if(args[0].equalsIgnoreCase("All")) {
                     if(!p.hasPermission("freeze.admin")) return false;
                     for(Player pl : Bukkit.getOnlinePlayers()) {
+                        boolean exempt = false;
                         for(String s : main.getConfig().getStringList("exempt")) {
                             if(pl.hasPermission(s)) {
-                                return false;
+                                exempt = true;
                             }
                         }
+                        if(exempt) continue;
                         utils.freeze(pl);
                         pl.sendMessage(utils.chat(main.getConfig().getString("frozen")));
                         pl.playSound(p.getLocation(), Sound.valueOf(main.getConfig().getString("freezeSound")), 10, 10);
@@ -56,28 +58,32 @@ public class FreezeCmd implements CommandExecutor {
                         utils.freeze(toFreeze);
                         toFreeze.sendMessage(utils.chat(main.getConfig().getString("frozen")));
                         toFreeze.playSound(p.getLocation(), Sound.valueOf(main.getConfig().getString("freezeSound")), 10, 10);
-                        toFreeze.sendTitle(utils.chat(main.getConfig().getString("freezeTitle")), utils.chat(main.getConfig().getString("freezeTitleSubText")), 1, 20,1);
+                        toFreeze.sendTitle(utils.chat(main.getConfig().getString("freezeTitle")), utils.chat(main.getConfig().getString("freezeTitleSubText")), 1, main.getConfig().getInt("freezeTitleTime"),1);
                     }
                 } else if(args[0].equalsIgnoreCase("PERMISSION")) {
                     if(!p.hasPermission("freeze.admin")) return false;
-                    if(args.length < 3) {
+                    if(args.length < 2) {
                         p.sendMessage(utils.chat(main.getConfig().getString("usage")));
                         return false;
                     } else {
                         for(Player pl : utils.getPlayer(args[1])) {
+                            Boolean exempt = false;
                             for(String s : main.getConfig().getStringList("exempt")) {
                                 if(pl.hasPermission(s)) {
-                                    return false;
+                                   exempt = true;
                                 }
                             }
+                            if(exempt) continue;
                             utils.freeze(pl);
-                            pl.playSound(p.getLocation(),  Sound.valueOf(main.getConfig().getString("freezeSound")), 10, 10);
                             if(main.getConfig().get(args[1]) == null) {
-                                pl.sendTitle(utils.chat(main.getConfig().getString("freezeTitle")), utils.chat(main.getConfig().getString("freezeTitle")), 1, 20, 1);
+                                pl.sendTitle(utils.chat(main.getConfig().getString("freezeTitle")), utils.chat(main.getConfig().getString("freezeTitleSubText")), 1, main.getConfig().getInt("freezeTitleTime"), 1);
+                                pl.sendMessage(utils.chat(main.getConfig().getString("frozen")));
+                                pl.playSound(p.getLocation(),  Sound.valueOf(main.getConfig().getString("freezeSound")), 10, 10);
                             } else {
-                                pl.sendTitle(utils.chat(main.getConfig().getString(args[0] + ".title")), utils.chat(main.getConfig().getString(args[0] + ".subtitle")), 1, 20, 1);
+                                pl.sendTitle(utils.chat(main.getConfig().getString(args[1] + ".freezeTitle")), utils.chat(main.getConfig().getString(args[1] + ".freezeSubTitle")), 1, main.getConfig().getInt(args[1] + ".freezeTitleTime"), 1);
+                                pl.sendMessage(utils.chat(main.getConfig().getString(args[1] + ".freezeMessage")));
+                                pl.playSound(p.getLocation(),  Sound.valueOf(main.getConfig().getString(args[1] + ".freezeSound")), 10, 10);
                             }
-                            pl.sendMessage(utils.chat(main.getConfig().getString("frozen")));
                         }
                     }
                 } else if(args[0].equalsIgnoreCase("RELOAD")) {
@@ -89,10 +95,8 @@ public class FreezeCmd implements CommandExecutor {
                     if(p.hasPermission("freeze.lockdown")) {
                         if(utils.getLockdown()) {
                             utils.setLockdown(false);
-                            utils.broadcast(utils.chat(main.getConfig().getString("lockdownOff")));
                         } else {
                             utils.setLockdown(true);
-                            utils.broadcast(utils.chat(main.getConfig().getString("lockdownOn")));
                         }
                     }
                 }
@@ -122,20 +126,20 @@ public class FreezeCmd implements CommandExecutor {
                     }
                 } else if(args[0].equalsIgnoreCase("PERMISSION")) {
                     if(!p.hasPermission("freeze.admin")) return false;
-                    if(args.length < 3) {
+                    if(args.length < 2) {
                         p.sendMessage(utils.chat(main.getConfig().getString("usage")));
                         return false;
                     } else {
-                        for(Player pl : utils.getPlayer(args[2])) {
+                        for(Player pl : utils.getPlayer(args[1])) {
                             utils.freeze(pl, time);
                             if(main.getConfig().get(args[1]) == null) {
-                                pl.sendTitle(utils.chat(main.getConfig().getString("freezeTitle")), utils.chat(main.getConfig().getString("freezeTitle")), 1, 20, 1);
+                                pl.sendTitle(utils.chat(main.getConfig().getString("freezeTitle")), utils.chat(main.getConfig().getString("freezeTitleSubText")), 1, main.getConfig().getInt("freezeTitleTime"), 1);
                                 pl.sendMessage(utils.chat(main.getConfig().getString("frozen")));
                                 pl.playSound(p.getLocation(),  Sound.valueOf(main.getConfig().getString("freezeSound")), 10, 10);
                             } else {
-                                pl.sendTitle(utils.chat(main.getConfig().getString(args[0] + ".title")), utils.chat(main.getConfig().getString(args[0] + ".subtitle")), 1, 20, 1);
-                                pl.sendMessage(utils.chat(main.getConfig().getString(args[0] + ".message")));
-                                pl.playSound(p.getLocation(),  Sound.valueOf(main.getConfig().getString(args[0] + ".sound")), 10, 10);
+                                pl.sendTitle(utils.chat(main.getConfig().getString(args[1] + ".freezeTitle")), utils.chat(main.getConfig().getString(args[1] + ".freezeSubTitle")), 1, main.getConfig().getInt(args[1] + ".freezeTitleTime"), 1);
+                                pl.sendMessage(utils.chat(main.getConfig().getString(args[1] + ".freezeMessage")));
+                                pl.playSound(p.getLocation(),  Sound.valueOf(main.getConfig().getString(args[1] + ".freezeSound")), 10, 10);
                             }
                         }
                     }

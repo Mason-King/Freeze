@@ -19,6 +19,8 @@ public final class Main extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new BreakEvent(), this);
         this.getCommand("Freeze").setExecutor(new FreezeCmd());
         this.getCommand("unfreeze").setExecutor(new UnfreezeCmd());
+
+        saveDefaultConfig();
     }
 
     @Override

@@ -37,6 +37,19 @@ public class Utils {
     }
 
     public void setLockdown(Boolean b) {
+        if(b == true) {
+            for(Player p : Bukkit.getOnlinePlayers()) {
+                p.sendMessage(chat(main.getConfig().getString("lockdownOn")));
+                p.sendTitle(chat(main.getConfig().getString("lockdownOnTitle")), chat(main.getConfig().getString("lockdownOnSubTitle")), 1, main.getConfig().getInt("lockdownOnTitleTime"), 1);
+                p.playSound(p.getLocation(), Sound.valueOf(main.getConfig().getString("lockdownOnSound")), 10, 10);
+            }
+        } else {
+            for(Player p : Bukkit.getOnlinePlayers()) {
+                p.sendMessage(chat(main.getConfig().getString("lockdownOff")));
+                p.sendTitle(chat(main.getConfig().getString("lockdownOffTitle")), chat(main.getConfig().getString("lockdownOffSubTitle")), 1, main.getConfig().getInt("lockdownOffTitleTime"), 1);
+                p.playSound(p.getLocation(), Sound.valueOf(main.getConfig().getString("lockdownOffSound")), 10, 10);
+            }
+        }
         lockdown = b;
     }
 
